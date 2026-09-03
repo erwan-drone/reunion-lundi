@@ -898,10 +898,6 @@ async function init(){
   }catch(e){
     console.error('Erreur liste communication', e);
   }
-  if(!state.weeks.includes(todayMonday)){
-    state.weeks.unshift(todayMonday);
-    state.weeks.sort().reverse();
-  }
   await selectWeek(todayMonday);
   state.loading = false;
   render();
@@ -1068,10 +1064,6 @@ async function confirmDeleteWeek(iso){
 
   if(state.selected === iso){
     const todayMonday = mondayISO(new Date());
-    if(!state.weeks.includes(todayMonday)){
-      state.weeks.unshift(todayMonday);
-      state.weeks.sort().reverse();
-    }
     const fallback = state.weeks.find(w => w !== iso) || todayMonday;
     await selectWeek(fallback);
   } else {
