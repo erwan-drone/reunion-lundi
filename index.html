@@ -724,7 +724,7 @@ window.storage = {
   async get(key){
     const url = `${SUPABASE_URL}/rest/v1/app_storage?key=eq.${encodeURIComponent(key)}&select=key,value`;
     const res = await fetch(url, {
-      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
+      headers: { apikey: SUPABASE_ANON_KEY }
     });
     if(!res.ok) throw new Error('Storage get failed: ' + res.status);
     const rows = await res.json();
@@ -735,7 +735,6 @@ window.storage = {
       method: 'POST',
       headers: {
         apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         'Content-Type': 'application/json',
         Prefer: 'resolution=merge-duplicates,return=representation'
       },
@@ -750,7 +749,6 @@ window.storage = {
       method: 'DELETE',
       headers: {
         apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         Prefer: 'return=representation'
       }
     });
@@ -762,7 +760,7 @@ window.storage = {
     let url = `${SUPABASE_URL}/rest/v1/app_storage?select=key`;
     if(prefix){ url += `&key=like.${encodeURIComponent(prefix + '*')}`; }
     const res = await fetch(url, {
-      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` }
+      headers: { apikey: SUPABASE_ANON_KEY }
     });
     if(!res.ok) throw new Error('Storage list failed: ' + res.status);
     const rows = await res.json();
